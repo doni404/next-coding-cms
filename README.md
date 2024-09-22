@@ -1,44 +1,104 @@
-# Next.js + Materialize UI v5 + Thirdweb SDK v2
-This is an CMS project using reactjs, nextjs, MUI, and thirdweb blockchain SDK. Backend side consuming from Golang API in other repository.
-Template bought from themeforest [themeforest.net](https://themeforest.net/item/materialize-material-design-admin-template/11446068#).
 
-This example shows how to use [Material UI](https://mui.com/material-ui/getting-started/usage/) with Next.js. It follows the steps outlined in the official [Material UI](https://mui.com/material-ui/getting-started/usage/).
+# CMS Project
 
-## Installation
-Go to root path and use yarn with the command below.
+This is a CMS (Content Management System) built using Next.js for Coconut Pudding Project, `pnpm` as the package manager, and MUI (Material-UI) for the UI components. The project follows a CI/CD pipeline using GitHub Actions for pull request approvals to the development and master branches.
 
+## Table of Contents
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Installation](#installation)
+- [Development](#development)
+- [Building for Production](#building-for-production)
+- [GitHub Actions](#github-actions)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+- Modern CMS site built with Next.js
+- Styled using Material-UI (MUI)
+- CI/CD pipeline with GitHub Actions
+- Efficient package management with `pnpm`
+- Pull request approval workflows
+
+## Tech Stack
+- **Framework**: [Next.js](https://nextjs.org/)
+- **Package Manager**: [pnpm](https://pnpm.io/)
+- **UI Library**: [MUI](https://mui.com/)
+- **CI/CD**: GitHub Actions
+
+## Getting Started
+
+### Prerequisites
+- Node.js (>= 16.x)
+- `pnpm` (Installation: `npm install -g pnpm`)
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/doni404/coding-cms-nextjs.git
+   cd your-repo
+   ```
+2. Install dependencies using `pnpm`:
+   ```bash
+   pnpm install
+   ```
+
+### Development
+To start the development server, run:
 ```bash
-yarn install
+pnpm dev
 ```
-After the process complete, run development using
+The project will be available at `http://localhost:7002`.
 
+### Building for Production
+To build the project for production, run:
 ```bash
-yarn dev
+pnpm build
 ```
-
-## Thirdweb SDK v2
-We are connecting to the Blockchain network using Thirdweb SDK [`thirdweb.com`](https://thirdweb.com).
-If you have an **existing** project you want to integrate thirdweb into, install the thirdweb SDKs:
+You can then start the production server with:
 ```bash
-npm install @thirdweb-dev/react @thirdweb-dev/sdk ethers
+pnpm start
 ```
+The project will be available at `http://localhost:7000`.
 
-## Deploying the code
+## GitHub Actions
+This project uses GitHub Actions for CI/CD with the following workflow:
+- Pull requests to the `development` and `master` branches require approval.
+- The `development` branch is for ongoing work, while the `master` branch is for production-ready code.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+### Workflow
+1. Create a feature branch: `git checkout -b feature/your-feature`
+2. Commit changes using [Conventional Commits](https://www.conventionalcommits.org/).
+3. Push your branch and open a pull request to the `development` branch.
+4. Upon approval, merge into `development`.
+5. When ready for production, open a pull request from `development` to `master`.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+### CI/CD Configuration
+The workflow file `.github/workflows/dev.yml` manages the following tasks:
+- Checks out the repository code using actions/checkout.
+- Copies the private key and connects to the server.
+- Switches to the development branch on the EC2 instance.
+- Pulls the latest code from the development branch.
+- Installs dependencies using pnpm install --frozen-lockfile.
+- Checks if the application is already running with PM2:
+If running, it restarts the app.
+If not, it starts the app using pm2.
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+The workflow utilizes GitHub Secrets to store sensitive information:
+PRIVATE_KEY: The SSH private key used to connect to the EC2 instance.
+HOSTNAME: The hostname of the EC2 instance.
+USER: The SSH username for the EC2 instance.
 
-## How to use
+You can find the workflow configuration in `.github/workflows/dev.yml`
 
-The starter "muxt" which is combination of MUI and Next.
+## Contributing
+Contributions are welcome! Please follow these steps:
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'feat: add new feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a pull request
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example muxt
-# or
-yarn create next-app --example muxt
-```
+## License
+This project is licensed under the [MIT License](LICENSE).

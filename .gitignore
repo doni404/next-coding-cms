@@ -1,0 +1,44 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# pnpm-related
+.pnpm/
+
+# Next.js build output
+/.next
+/out
+
+# Production build output
+/build
+
+# Testing
+/coverage
+
+# Environment variables
+.env
+.env.test
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Miscellaneous
+.DS_Store
+.history
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Ignore TypeScript build cache (if using TypeScript)
+*.tsbuildinfo
+
+# IDE specific files
+.vscode/
+.idea/

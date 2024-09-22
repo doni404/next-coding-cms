@@ -1,0 +1,42 @@
+// ** Third Party Imports
+import axios from 'axios'
+
+// ** Demo Components Imports
+import AdminViewpage from "src/views/admin/detail/AdminViewpage";
+
+export const BASE_URL_API = process.env.REACT_APP_BASE_URL_API;
+
+const AdminView = ({ id }) => {
+  return <AdminViewpage id={id} />;
+}
+
+/*export const getStaticPaths = async () => {
+  const res = await axios.get(BASE_URL_API + 'v1/admins_ids')
+  const data = await res.data.data
+  const paths = data.map(item => ({
+    params: { id: `${item.id}` }
+  }))
+  console.log("data : ", data)
+  return {
+    paths,
+    fallback: false
+  }
+}
+
+export const getStaticProps = async ({ params }) => {
+  return {
+    props: {
+      id: params?.id
+    }
+  }
+}*/
+
+export const getServerSideProps = async (context) => {
+  return {
+    props: {
+      id: context.params?.id,
+    },
+  };
+};
+
+export default AdminView
